@@ -1,1 +1,21 @@
 
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - backend1
+      - backend2
+
+  backend1:
+    image: nginx:latest
+    volumes:
+      - ./backend1.html:/usr/share/nginx/html/index.html:ro
+
+  backend2:
+    image: nginx:latest
+    volumes:
+      - ./backend2.html:/usr/share/nginx/html/index.html:ro
